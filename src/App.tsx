@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { NoContent } from "./components/NoContent";
+import { YesContent } from "./components/YesContent";
+import { ButtonsSection } from "./components/ButtonSection";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [noCount, setNoCount] = useState<number>(0);
+  const [yesPressed, setYesPressed] = useState<boolean>(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <section>
+      <h1>{!yesPressed ? "Will you be my Valentine?" : "YOHOOOOO"}</h1>
+      {yesPressed ? (
+        <YesContent />
+      ) : (
+        <>
+          <NoContent noCount={noCount} />
+          <ButtonsSection
+            setNoCount={setNoCount}
+            noCount={noCount}
+            setYesPressed={setYesPressed}
+          />
+        </>
+      )}
+    </section>
+  );
 }
 
-export default App
+export default App;
